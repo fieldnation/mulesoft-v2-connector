@@ -45,10 +45,14 @@ public class FnV2Connector {
     		return token_details_json;
     	} catch (Exception e) {
     		e.printStackTrace();
-    		throw e;
+    		return e.getMessage();
     	}
 	}
-    
+    /**
+     * initClient:
+     * Initializes the OkHttpClient with specified timeouts
+     * @return OkHttpClient
+     */
     private OkHttpClient initClient(){
     	return new OkHttpClient.Builder()
         .connectTimeout(10, TimeUnit.SECONDS)
@@ -56,13 +60,21 @@ public class FnV2Connector {
         .readTimeout(30, TimeUnit.SECONDS)
         .build();
     }
-    private Builder initClientBuilder(String basePath) throws IOException{
+    /**
+     * initClientBuilder:
+     * Returns okhttp3.Request.Builder with an initialized URL property
+     * @param requestPath 
+     * @return okhttp3.Request.Builder
+     * @throws IOException Comment for Exception
+     */
+    private Builder initClientBuilder(String requestPath) throws IOException{
     	String access_token = initToken().getAccessToken();
     	client = initClient();
-    	return new Request.Builder().url(baseUri + basePath + "?access_token=" + access_token);
+    	return new Request.Builder().url(baseUri + requestPath + "?access_token=" + access_token);
     }
     /**
-     * get token_details
+     * InitToken:
+     * Returns oAuth token details (also creates an oAuth2 token if needed)
      *
      * @return OauthResponse
      * @throws IOException Comment for Exception
@@ -76,15 +88,16 @@ public class FnV2Connector {
     		return token_details;
     	} catch (Exception e) {
     		e.printStackTrace();
-    		throw e;
+    		return new OauthResponse();
     	}
 	}
     
     /**
-     * Add Workorder
-     *
-     * @return JSON Workorder Model 
-     * @throws Exception 
+     * AddWorkorder:
+     * Create a work order
+     * @param workorder_model JSON
+     * @return Workorder Model JSON
+     * @throws IOException Comment for IOException
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
@@ -99,8 +112,10 @@ public class FnV2Connector {
 	} 
     
     /**
-     * Publish Workorder
-     *
+     * Publish Workorder:
+     * Publishes a work order to the marketplace where it can garner requests.
+     * @param long Workorder_ID
+     * @param JSON cc model
      * @return JSON Workorder Model 
      * @throws IOException Comment for Exception
      */
@@ -117,8 +132,10 @@ public class FnV2Connector {
 	}
     
     /**
-     * Route Workorder
-     *
+     * Route Workorder:
+     * Route a work order to a user
+     * @param long Workorder_ID
+     * @param JSON user model that minimally contains an id
      * @return JSON Workorder Model 
      * @throws IOException Comment for Exception
      */
@@ -135,14 +152,16 @@ public class FnV2Connector {
 	}
     
     /**
-     * AutoDispatch Workorder
-     *
-     * @return JSON Workorder Model 
+     * AutoDispatch Workorder:
+     * Auto-dispatches one or more draft work orders
+     * @param long Workorder_ID
+     * @param JSON AutoDispatch model which contains the selection rules
+     * @return String server message
      * @throws IOException Comment for Exception
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
-    public String autoDispatchWorkorder(long workorder_id, String json_body) throws IOException {
+    public String autoDispatchWorkorder(int workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/auto_dispatch")
             .post(body)
@@ -153,8 +172,10 @@ public class FnV2Connector {
 	}
     
     /**
-     * Update Pay
-     *
+     * Update Pay:
+     * Updates the pay of a work order, or requests an adjustment
+     * @param int workorder_id
+     * @param pay_model json_body
      * @return JSON Workorder Model 
      * @throws IOException Comment for Exception
      */
@@ -171,8 +192,10 @@ public class FnV2Connector {
 	}
     
     /**
-     * Update Schedule
-     *
+     * Update Schedule:
+     * Updates the service schedule or eta of a work order (depending on your role)
+     * @param int workorder_id
+     * @param schedule model
      * @return JSON Workorder Model 
      * @throws IOException Comment for Exception
      */
@@ -189,8 +212,10 @@ public class FnV2Connector {
 	}
     
     /**
-     * Assign Workorder
-     *
+     * assignWorkorder:
+     * Assigns a user to a work order
+     * @param workorder_id
+     * @param assignee
      * @return JSON Workorder Model 
      * @throws IOException Comment for Exception
      */
@@ -210,7 +235,7 @@ public class FnV2Connector {
      * Authenticate
      *
      * @return OAuthResponse<JSON>
-     * @throws IOException Comment for Exception
+     * @throws IOException Comment for IOException
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })

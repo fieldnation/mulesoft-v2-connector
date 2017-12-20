@@ -71,7 +71,7 @@ public class ConnectorConfig {
     /**
      * Get base_url	
      *
-     *
+     * @return baseUrl
      */
     public String getBaseUrl() {
         return baseUrl;
@@ -80,7 +80,7 @@ public class ConnectorConfig {
     /**
      * Set base_path	
      *
-     * @param base_url
+     * @param base_path
      */
     public void setBasePath(String base_path) {
         this.basePath = base_path;
@@ -116,7 +116,7 @@ public class ConnectorConfig {
     /**
      * Set client_id
      *
-     * @param client_id
+     * @param client_secret
      */
     public void setClientSecret(String client_secret) {
         this.clientSecret = client_secret;
@@ -125,7 +125,7 @@ public class ConnectorConfig {
     /**
      * Set client_secret
      *
-     * @param client_secret
+     * @param client_id
      */
     public void setClientId(String client_id) {
         this.clientId = client_id;

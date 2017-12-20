@@ -29,7 +29,7 @@ public class AutoDispatchWorkorderTestCases extends AbstractTestCase<FnV2Connect
 	@Test
 	public void verify() throws IOException {
 		java.lang.String expected = null;
-		long workorder_id = 0;
+		int workorder_id = 0;
 		java.lang.String json_body = null;
 		assertEquals(getConnector().autoDispatchWorkorder(workorder_id, json_body), expected);
 	}
