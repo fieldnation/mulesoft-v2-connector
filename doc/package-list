@@ -1,1 +1,12 @@
+com.fieldnation
+com.fieldnation.modules.fnv2
+com.fieldnation.modules.fnv2.automation.functional
+com.fieldnation.modules.fnv2.automation.runner
+com.fieldnation.modules.fnv2.config
+com.fieldnation.modules.fnv2.generated.adapter
+com.fieldnation.modules.fnv2.generated.adapters
+com.fieldnation.modules.fnv2.generated.agents
 com.fieldnation.modules.fnv2.generated.config
+com.fieldnation.modules.fnv2.generated.devkit
+com.fieldnation.modules.fnv2.generated.processors
+org.mule.tooling.ui.contribution
