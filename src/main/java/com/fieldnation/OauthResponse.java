@@ -9,7 +9,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 public class OauthResponse implements Serializable
 {
-
     @SerializedName("access_token")
     @Expose
     private String accessToken;
