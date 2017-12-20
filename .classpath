@@ -14,7 +14,6 @@
 	<classpathentry kind="var" path="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.1/javax.ws.rs-api-2.1.jar" sourcepath="M2_REPO/javax/ws/rs/javax.ws.rs-api/2.1/javax.ws.rs-api-2.1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar" sourcepath="M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/mail/mailapi/1.4.3/mailapi-1.4.3.jar" sourcepath="M2_REPO/javax/mail/mailapi/1.4.3/mailapi-1.4.3-sources.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="var" path="M2_REPO/org/mule/modules/mule-module-jersey/3.8.0/mule-module-jersey-3.8.0.jar" sourcepath="M2_REPO/org/mule/modules/mule-module-jersey/3.8.0/mule-module-jersey-3.8.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/mule/mule-core/3.8.0/mule-core-3.8.0.jar" sourcepath="M2_REPO/org/mule/mule-core/3.8.0/mule-core-3.8.0-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/mule/extensions/mule-extensions-api/1.0.0-alpha-1/mule-extensions-api-1.0.0-alpha-1.jar" sourcepath="M2_REPO/org/mule/extensions/mule-extensions-api/1.0.0-alpha-1/mule-extensions-api-1.0.0-alpha-1-sources.jar"/>
@@ -268,5 +267,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

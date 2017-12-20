@@ -69,7 +69,7 @@ public class FnV2Connector {
      */
     private Builder initClientBuilder(String requestPath) throws IOException{
     	String access_token = initToken().getAccessToken();
-    	client = initClient();
+    	FnV2Connector.client = initClient();
     	return new Request.Builder().url(baseUri + requestPath + "?access_token=" + access_token);
     }
     /**
@@ -251,7 +251,7 @@ public class FnV2Connector {
         		.build();
         try (Response response = authClient.newCall(request).execute()) {
           String responseBody = response.body().string();
-          token_details = gson.fromJson(responseBody, OauthResponse.class);
+          FnV2Connector.token_details = gson.fromJson(responseBody, OauthResponse.class);
           return responseBody;
         }
 	} 
