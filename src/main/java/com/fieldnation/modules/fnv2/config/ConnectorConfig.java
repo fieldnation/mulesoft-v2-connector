@@ -13,28 +13,28 @@ public class ConnectorConfig {
      */
     @Configurable
     @Default("https://api.fieldnation.com")
-    private String base_url;
+    private String baseUrl;
     
     /**
      * base_path
      */
     @Configurable
     @Default("/api/rest/v2")
-    private String base_path;
+    private String basePath;
     
 	/**
      * grant_type
      */
     @Configurable
     @Default("password")
-    private String grant_type;
+    private String grantType;
     
     /**
      * client_id
      */
     @Configurable
     @Default("demoapp")
-    private String client_id;
+    private String clientId;
     
     /**
      * client_secret
@@ -42,7 +42,7 @@ public class ConnectorConfig {
     @Configurable
     @Default("demopass")
     @Password
-    private String client_secret;
+    private String clientSecret;
     
     /**
      * username
@@ -64,8 +64,8 @@ public class ConnectorConfig {
      *
      * @param base_url
      */
-    public void setBase_url(String base_url) {
-        this.base_url = base_url;
+    public void setBaseUrl(String base_url) {
+        this.baseUrl = base_url;
     }
     
     /**
@@ -73,8 +73,8 @@ public class ConnectorConfig {
      *
      *
      */
-    public String getBase_url() {
-        return base_url;
+    public String getBaseUrl() {
+        return baseUrl;
     }
     
     /**
@@ -82,8 +82,8 @@ public class ConnectorConfig {
      *
      * @param base_url
      */
-    public void setBase_path(String base_path) {
-        this.base_path = base_path;
+    public void setBasePath(String base_path) {
+        this.basePath = base_path;
     }
     
     /**
@@ -91,8 +91,8 @@ public class ConnectorConfig {
      *
      *
      */
-    public String getBase_path() {
-        return base_path;
+    public String getBasePath() {
+        return basePath;
     }
     
     /**
@@ -100,8 +100,8 @@ public class ConnectorConfig {
      *
      *
      */
-    public String getApi_url() {
-        return getBase_url() + getBase_path();
+    public String getApiUrl() {
+        return getBaseUrl() + getBasePath();
     }
     
     /**
@@ -109,8 +109,8 @@ public class ConnectorConfig {
      *
      * @param grant_type
      */
-    public void setGrant_type(String grant_type) {
-        this.grant_type = grant_type;
+    public void setGrantType(String grant_type) {
+        this.grantType = grant_type;
     }
     
     /**
@@ -118,8 +118,8 @@ public class ConnectorConfig {
      *
      * @param client_id
      */
-    public void setClient_secret(String client_secret) {
-        this.client_secret = client_secret;
+    public void setClientSecret(String client_secret) {
+        this.clientSecret = client_secret;
     }
 
     /**
@@ -127,8 +127,8 @@ public class ConnectorConfig {
      *
      * @param client_secret
      */
-    public void setClient_id(String client_id) {
-        this.client_id = client_id;
+    public void setClientId(String client_id) {
+        this.clientId = client_id;
     }
     
     /**
@@ -152,22 +152,22 @@ public class ConnectorConfig {
     /**
      * Get grant_type
      */
-    public String getGrant_type() {
-        return this.grant_type;
+    public String getGrantType() {
+        return this.grantType;
     }
     
     /**
      * Get client_id
      */
-    public String getClient_id() {
-        return this.client_id;
+    public String getClientId() {
+        return this.clientId;
     }
 
     /**
      * Get client_secret
      */
-    public String getClient_secret() {
-        return this.client_secret;
+    public String getClientSecret() {
+        return this.clientSecret;
     }
     
     /**

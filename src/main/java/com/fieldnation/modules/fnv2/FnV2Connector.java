@@ -26,7 +26,7 @@ public class FnV2Connector {
     ConnectorConfig config;
    
     private static String baseUri;
-    public static OauthResponse token_details = new OauthResponse();
+    public volatile static OauthResponse token_details = new OauthResponse();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     static OkHttpClient client = new OkHttpClient();
     
@@ -72,7 +72,7 @@ public class FnV2Connector {
     	try {
     		if(token_details.getAccessToken() == null || token_details.isExpired())
     			generateAccessToken();
-    		baseUri = config.getApi_url();
+    		baseUri = config.getApiUrl();
     		return token_details;
     	} catch (Exception e) {
     		e.printStackTrace();
@@ -215,13 +215,13 @@ public class FnV2Connector {
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
     public String generateAccessToken() throws IOException {
-    	AuthPayload ap = new AuthPayload(config.getGrant_type(), config.getUsername(), config.getPassword(), config.getClient_id(), config.getClient_secret());
+    	AuthPayload ap = new AuthPayload(config.getGrantType(), config.getUsername(), config.getPassword(), config.getClientId(), config.getClientSecret());
 		Gson gson = new Gson();
 		String resource_owner_json = gson.toJson(ap);
 		OkHttpClient authClient = initClient();
 		RequestBody body = RequestBody.create(JSON, resource_owner_json);
         Request request = new Request.Builder()
-        		.url(config.getBase_url() + "/authentication/api/oauth/token")
+        		.url(config.getBaseUrl() + "/authentication/api/oauth/token")
         		.post(body)
         		.build();
         try (Response response = authClient.newCall(request).execute()) {

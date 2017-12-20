@@ -24,27 +24,27 @@ public final class AuthPayload {
 		this.password = password;
 	}
 	
-	public String getGrant_Type(){
+	public String getGrantType(){
 		return grant_type;
 	}
 	
-	public void setGrant_Type(String grant_type){
+	public void setGrantType(String grant_type){
 		this.grant_type = grant_type;
 	}
 	
-	public String getClient_Id(){
+	public String getClientId(){
 		return client_id;
 	}
 	
-	public void setClient_Id(String client_id){
+	public void setClientId(String client_id){
 		this.client_id = client_id;
 	}
 	
-	public String getClient_Secret(){
+	public String getClientSecret(){
 		return client_secret;
 	}
 	
-	public void setClient_Secret(String client_secret){
+	public void setClientSecret(String client_secret){
 		this.client_secret = client_secret;
 	}
 	
