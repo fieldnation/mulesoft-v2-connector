@@ -1,0 +1,8 @@
+.DS_Store
+.metadata/*
+.apt_generated/*
+.settings/*
+.mule/*
+studio_id.xml
+*/target/*
+
