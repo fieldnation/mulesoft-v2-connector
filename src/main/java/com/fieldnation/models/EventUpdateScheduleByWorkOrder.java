@@ -53,7 +53,7 @@ public class EventUpdateScheduleByWorkOrder {
     this.old = old;
   }
 
-  public EventUpdateScheduleByWorkOrder _new(EventUpdateScheduleByWorkOrderOld _new) {
+  public EventUpdateScheduleByWorkOrder getNew(EventUpdateScheduleByWorkOrderOld _new) {
     this._new = _new;
     return this;
   }

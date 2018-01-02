@@ -97,7 +97,7 @@ public class LocationNotesInner {
     this.created = created;
   }
 
-  public LocationNotesInner _private(Boolean _private) {
+  public LocationNotesInner getPrivate(Boolean _private) {
     this._private = _private;
     return this;
   }

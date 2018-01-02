@@ -52,7 +52,7 @@ public class WorkOrderRatingsAssignedProviderWorkOrderComment {
     this.message = message;
   }
 
-  public WorkOrderRatingsAssignedProviderWorkOrderComment _private(Boolean _private) {
+  public WorkOrderRatingsAssignedProviderWorkOrderComment getPrivate(Boolean _private) {
     this._private = _private;
     return this;
   }

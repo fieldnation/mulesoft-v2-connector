@@ -161,7 +161,7 @@ public class Template {
     this.name = name;
   }
 
-  public Template _default(Boolean _default) {
+  public Template getDefault(Boolean _default) {
     this._default = _default;
     return this;
   }

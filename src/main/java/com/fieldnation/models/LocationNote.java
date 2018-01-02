@@ -98,7 +98,7 @@ public class LocationNote {
     this.created = created;
   }
 
-  public LocationNote _private(Boolean _private) {
+  public LocationNote getPrivate(Boolean _private) {
     this._private = _private;
     return this;
   }

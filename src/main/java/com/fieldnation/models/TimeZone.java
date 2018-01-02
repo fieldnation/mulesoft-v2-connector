@@ -77,7 +77,7 @@ public class TimeZone {
     this.name = name;
   }
 
-  public TimeZone _short(String _short) {
+  public TimeZone getShort(String _short) {
     this._short = _short;
     return this;
   }

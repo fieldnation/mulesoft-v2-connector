@@ -132,7 +132,7 @@ public class SavedList {
     this.count = count;
   }
 
-  public SavedList _default(Boolean _default) {
+  public SavedList getDefault(Boolean _default) {
     this._default = _default;
     return this;
   }

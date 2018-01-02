@@ -73,7 +73,7 @@ public class LocationAttribute {
     this.value = value;
   }
 
-  public LocationAttribute _private(Boolean _private) {
+  public LocationAttribute getPrivate(Boolean _private) {
     this._private = _private;
     return this;
   }
