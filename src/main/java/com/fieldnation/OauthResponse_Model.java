@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-public class OauthResponse implements Serializable
+public class OauthResponse_Model implements Serializable
 {
     @SerializedName("access_token")
     @Expose
@@ -35,7 +35,7 @@ public class OauthResponse implements Serializable
      * No args constructor for use in serialization
      * 
      */
-    public OauthResponse() {
+    public OauthResponse_Model() {
     }
 
     /**
@@ -47,7 +47,7 @@ public class OauthResponse implements Serializable
      * @param refreshToken
      * @param user
      */
-    public OauthResponse(String accessToken, Integer expiresIn, String tokenType, String scope, String refreshToken, User user) {
+    public OauthResponse_Model(String accessToken, Integer expiresIn, String tokenType, String scope, String refreshToken, User user) {
         super();
         this.accessToken = accessToken;
         this.expiresIn = expiresIn;
@@ -66,7 +66,7 @@ public class OauthResponse implements Serializable
         this.accessToken = accessToken;
     }
 
-    public OauthResponse withAccessToken(String accessToken) {
+    public OauthResponse_Model withAccessToken(String accessToken) {
         this.accessToken = accessToken;
         return this;
     }
@@ -79,7 +79,7 @@ public class OauthResponse implements Serializable
         this.expiresIn = expiresIn;
     }
 
-    public OauthResponse withExpiresIn(Integer expiresIn) {
+    public OauthResponse_Model withExpiresIn(Integer expiresIn) {
         this.expiresIn = expiresIn;
         return this;
     }
@@ -92,7 +92,7 @@ public class OauthResponse implements Serializable
         this.tokenType = tokenType;
     }
 
-    public OauthResponse withTokenType(String tokenType) {
+    public OauthResponse_Model withTokenType(String tokenType) {
         this.tokenType = tokenType;
         return this;
     }
@@ -105,7 +105,7 @@ public class OauthResponse implements Serializable
         this.scope = scope;
     }
 
-    public OauthResponse withScope(String scope) {
+    public OauthResponse_Model withScope(String scope) {
         this.scope = scope;
         return this;
     }
@@ -118,7 +118,7 @@ public class OauthResponse implements Serializable
         this.refreshToken = refreshToken;
     }
 
-    public OauthResponse withRefreshToken(String refreshToken) {
+    public OauthResponse_Model withRefreshToken(String refreshToken) {
         this.refreshToken = refreshToken;
         return this;
     }
@@ -131,7 +131,7 @@ public class OauthResponse implements Serializable
         this.user = user;
     }
 
-    public OauthResponse withUser(User user) {
+    public OauthResponse_Model withUser(User user) {
         this.user = user;
         return this;
     }

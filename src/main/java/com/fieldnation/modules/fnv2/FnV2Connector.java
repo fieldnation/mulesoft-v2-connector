@@ -1,6 +1,7 @@
 package com.fieldnation.modules.fnv2;
 
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.MediaType;
@@ -9,24 +10,29 @@ import okhttp3.Request;
 import okhttp3.Request.Builder;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import org.apache.commons.lang.builder.ToStringBuilder;
 import org.mule.api.annotations.Config;
 import org.mule.api.annotations.Connector;
 import org.mule.api.annotations.Processor;
 import org.mule.api.annotations.ReconnectOn;
 import com.fieldnation.AuthPayload;
-import com.fieldnation.OauthResponse;
+import com.fieldnation.OauthResponse_Model;
+import com.fieldnation.User;
 import com.fieldnation.modules.fnv2.config.ConnectorConfig;
 import com.google.gson.Gson;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+import mx4j.log.*;
 
 
 @Connector(name="fn-v2", friendlyName="Field Nation V2 Connector")
 public class FnV2Connector {
-
+	
     @Config
     ConnectorConfig config;
-   
+    Logger logger = Log.getLogger("FN_V2_Connector");
     private static String baseUri;
-    public volatile static OauthResponse token_details = new OauthResponse();
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     static OkHttpClient client = new OkHttpClient();
     
@@ -38,14 +44,14 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { Exception.class })
-    public String getTokenDetails() throws IOException {
+    public String getTokenDetails() throws Exception  {
     	try {
     		Gson gson = new Gson();
-    		String token_details_json = gson.toJson(token_details); 
+    		String token_details_json = gson.toJson(OauthResponse.class); 
     		return token_details_json;
     	} catch (Exception e) {
-    		e.printStackTrace();
-    		return e.getMessage();
+    		logger.error(e.getMessage());
+    		throw e;
     	}
 	}
     /**
@@ -68,9 +74,16 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     private Builder initClientBuilder(String requestPath) throws IOException{
-    	String access_token = initToken().getAccessToken();
-    	FnV2Connector.client = initClient();
-    	return new Request.Builder().url(baseUri + requestPath + "?access_token=" + access_token);
+    	try{
+    		if(initToken()){
+    			FnV2Connector.client = initClient();
+        		return new Request.Builder().url(baseUri + requestPath + "?access_token=" + OauthResponse.accessToken);
+    		}
+    	}catch(IOException e){
+    		logger.error(e.getMessage());
+    		throw e;
+    	}
+		return null;
     }
     /**
      * InitToken:
@@ -79,16 +92,16 @@ public class FnV2Connector {
      * @return OauthResponse
      * @throws IOException Comment for Exception
      */
-    @ReconnectOn(exceptions = { Exception.class })
-    private OauthResponse initToken() throws IOException {
+    @ReconnectOn(exceptions = { IOException.class })
+    private boolean initToken() throws IOException {
     	try {
-    		if(token_details.getAccessToken() == null || token_details.isExpired())
+    		if(OauthResponse.accessToken == null || OauthResponse.isExpired())
     			generateAccessToken();
     		baseUri = config.getApiUrl();
-    		return token_details;
+    		return true;
     	} catch (Exception e) {
-    		e.printStackTrace();
-    		return new OauthResponse();
+    		logger.error(e.getMessage());
+    		throw e;
     	}
 	}
     
@@ -100,7 +113,7 @@ public class FnV2Connector {
      * @throws IOException Comment for IOException
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String addWorkorder(String workorder_model) throws IOException {
     	RequestBody body = RequestBody.create(JSON, workorder_model);
         Request request = initClientBuilder("/workorders")
@@ -108,7 +121,11 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
+  
 	} 
     
     /**
@@ -120,7 +137,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String publishWorkorder(long workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/publish")
@@ -128,6 +145,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -140,7 +160,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String routeWorkorder(long workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/route")
@@ -148,6 +168,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -160,7 +183,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String autoDispatchWorkorder(int workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/auto_dispatch")
@@ -168,6 +191,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -180,7 +206,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String updatePay(int workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/pay")
@@ -188,6 +214,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -200,7 +229,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String updateSchedule(int workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/schedule")
@@ -208,6 +237,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -220,7 +252,7 @@ public class FnV2Connector {
      * @throws IOException Comment for Exception
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String assignWorkorder(long workorder_id, String json_body) throws IOException {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/assignee")
@@ -228,6 +260,9 @@ public class FnV2Connector {
             .build();
         try (Response response = client.newCall(request).execute()) {
           return response.body().string();
+        }catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	}
     
@@ -238,7 +273,7 @@ public class FnV2Connector {
      * @throws IOException Comment for IOException
      */
     @Processor
-    @ReconnectOn(exceptions = { Exception.class })
+    @ReconnectOn(exceptions = { IOException.class })
     public String generateAccessToken() throws IOException {
     	AuthPayload ap = new AuthPayload(config.getGrantType(), config.getUsername(), config.getPassword(), config.getClientId(), config.getClientSecret());
 		Gson gson = new Gson();
@@ -251,8 +286,15 @@ public class FnV2Connector {
         		.build();
         try (Response response = authClient.newCall(request).execute()) {
           String responseBody = response.body().string();
-          FnV2Connector.token_details = gson.fromJson(responseBody, OauthResponse.class);
-          return responseBody;
+          OauthResponse_Model res = gson.fromJson(responseBody, com.fieldnation.OauthResponse_Model.class);
+          if(response.code() == 200){
+        	  OauthResponse.populate(res);
+        	  return responseBody;
+          }else
+        	  throw new IOException(response.message());
+		}catch(IOException e){
+        	logger.error(e.getMessage());
+        	throw e;
         }
 	} 
 
@@ -263,5 +305,65 @@ public class FnV2Connector {
     public void setConfig(ConnectorConfig config) {
         this.config = config;
     }
+    
+    public static class OauthResponse{
+		
+		@SerializedName("access_token")
+	    @Expose
+	    public static String accessToken;
+	    @SerializedName("expires_in")
+	    @Expose
+	    public static Integer expiresIn;
+	    @SerializedName("token_type")
+	    @Expose
+	    public static String tokenType;
+	    @SerializedName("scope")
+	    @Expose
+	    public static String scope;
+	    @SerializedName("refresh_token")
+	    @Expose
+	    public static String refreshToken;
+	    @SerializedName("user")
+	    @Expose
+	    public static User user;
+	    @SuppressWarnings("unused")
+		private final static long serialVersionUID = -6337704323905757010L;
+
+	    public static Calendar expireOn;
+	    
+	    /**
+	     * No args constructor for use in serialization
+	     * 
+	     */
+	    public OauthResponse() {
+	    }
+	    
+	    public static void populate(com.fieldnation.OauthResponse_Model response){
+	    	accessToken = response.getAccessToken();
+	    	expiresIn = response.getExpiresIn();
+	    	tokenType = response.getTokenType();
+	    	scope = response.getScope();
+	    	user = response.getUser();
+	    	setExpireOn();
+	    }
+	    
+	    private static void setExpireOn(){
+	    	Calendar now = Calendar.getInstance();
+	    	now.add(Calendar.SECOND, expiresIn);
+	    	expireOn = now;
+	    }
+	    
+	    public static Boolean isExpired() {
+	    	if(expireOn == null){
+	    		setExpireOn();
+	    	}
+	    	return (Calendar.getInstance().compareTo(expireOn) > 0);
+	    }
+
+	    @Override
+	    public String toString() {
+	        return new ToStringBuilder(this).append("accessToken", OauthResponse.accessToken).append("expiresIn", OauthResponse.expiresIn).append("tokenType", OauthResponse.tokenType).append("scope", OauthResponse.scope).append("refreshToken", OauthResponse.refreshToken).append("user", OauthResponse.user).toString();
+	    }
+	}
 
 }
