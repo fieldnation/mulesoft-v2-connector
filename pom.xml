@@ -4,9 +4,9 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.fieldnation.modules</groupId>
     <artifactId>fn-v2-connector</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>mule-module</packaging>
-    <name>Mule FnV2 Anypoint Connector</name>
+    <name>Fieldnation V2 Anypoint Connector</name>
 
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
