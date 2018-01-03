@@ -31,7 +31,7 @@ public class FnV2Connector {
 	
     @Config
     ConnectorConfig config;
-    static final Logger logger = Log.getLogger("FN_V2_Connector");
+    private static final Logger logger = Log.getLogger("FN_V2_Connector");
     private static String baseUri;
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
     static OkHttpClient client = new OkHttpClient();
