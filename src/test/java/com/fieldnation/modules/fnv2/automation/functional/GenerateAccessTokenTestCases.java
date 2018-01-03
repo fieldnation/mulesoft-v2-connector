@@ -27,10 +27,10 @@ public class GenerateAccessTokenTestCases extends AbstractTestCase<FnV2Connector
 	}
 
 @Test
-public void verify() throws IOException {
+public void verify() throws Exception {
 	java.lang.String expected=null;
 	getConnector();
-	assertEquals( getConnector().generateAccessToken(),expected);
+	assertEquals( getConnector().getTokenFromStore(),expected);
 }
 
 }

@@ -18,9 +18,7 @@ import com.fieldnation.modules.fnv2.FnV2Connector;
 import org.mule.tools.devkit.ctf.mockup.ConnectorTestContext;
 
 @RunWith(Suite.class)
-@SuiteClasses({ AddWorkorderTestCases.class, AssignWorkorderTestCases.class, AutoDispatchWorkorderTestCases.class, GenerateAccessTokenTestCases.class, GetTokenDetailsTestCases.class, PublishWorkorderTestCases.class, RouteWorkorderTestCases.class, UpdatePayTestCases.class, UpdateScheduleTestCases.class })
-
-public class FunctionalTestSuite {
+@SuiteClasses({ AddWorkorderTestCases.class, AssignWorkorderTestCases.class, AutoDispatchWorkorderTestCases.class, GenerateAccessTokenTestCases.class, GetTokenDetailsTestCases.class, PublishWorkorderTestCases.class, RouteWorkorderTestCases.class, UpdatePayTestCases.class, UpdateScheduleTestCases.class }) class FunctionalTestSuite {
 
 	@BeforeClass
 	public static void initialiseSuite() {

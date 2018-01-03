@@ -30,7 +30,7 @@ public class GetTokenDetailsTestCases extends AbstractTestCase<FnV2Connector> {
 public void verify() throws IOException {
 java.lang.String expected=null;
 try {
-	assertEquals(getConnector().getTokenDetails(),expected);
+	assertEquals(getConnector().getTokenJSON(),expected);
 } catch (Exception e) {
 	// TODO Auto-generated catch block
 	e.printStackTrace();

@@ -27,7 +27,7 @@ public class AddWorkorderTestCases extends AbstractTestCase<FnV2Connector> {
 	}
 
 	@Test
-	public void verify() throws IOException {
+	public void verify() throws Exception {
 		java.lang.String expected = null;
 		java.lang.String workorder_model = null;
 		assertEquals(getConnector().addWorkorder(workorder_model), expected);

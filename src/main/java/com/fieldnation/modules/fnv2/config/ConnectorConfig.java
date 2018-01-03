@@ -105,6 +105,24 @@ public class ConnectorConfig {
     }
     
     /**
+     * Get authURL
+     *
+     *
+     */
+    public String getAuthUrl() {
+        return getBaseUrl() + "/authentication/api/oauth/token";
+    }
+    
+    /**
+     * Get tokenPath
+     *
+     *
+     */
+    public String getTokenPath() {
+        return "/authentication/api/oauth/token";
+    }
+    
+    /**
      * Set grant_type
      *
      * @param grant_type

@@ -27,7 +27,7 @@ public class UpdatePayTestCases extends AbstractTestCase<FnV2Connector> {
 	}
 
 	@Test
-	public void verify() throws IOException {
+	public void verify() throws Exception {
 		java.lang.String expected = null;
 		int workorder_id = 0;
 		java.lang.String json_body = null;

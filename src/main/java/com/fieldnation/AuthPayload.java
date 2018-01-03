@@ -1,7 +1,13 @@
 package com.fieldnation;
 
-public final class AuthPayload {
+import java.io.Serializable;
 
+public final class AuthPayload implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6607638166334719338L;
 	private String username;
 	private String password;
 	private String grant_type;
@@ -51,7 +57,18 @@ public final class AuthPayload {
 	public AuthPayload() {
 		
 	}
-	
+	@Override
+    public int hashCode()
+    {
+        return username.hashCode()^101;
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+    	AuthPayload otherKey = (AuthPayload) obj;
+        return username.equals(otherKey.username);
+    }
 	public AuthPayload(String grant_type, String username, String password, String client_id, String client_secret){
 		this.grant_type = grant_type;
 		this.username = username;
