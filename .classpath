@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry including="**/*.java" kind="src" output="target/test-classes" path="src/test/java"/>
+	<classpathentry kind="src" path="src/main/java/com/fieldnation/modules/fnv2/config"/>
+	<classpathentry kind="src" path="src/main/java/com/fieldnation/models"/>
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/test/resources"/>
 	<classpathentry excluding="**/*.java" kind="src" output="target/test-classes" path="src/main/app"/>
-	<classpathentry including="**/*.java" kind="src" path="src/main/java"/>
-	<classpathentry kind="src" path="target/generated-sources/mule"/>
+	<classpathentry excluding="com/fieldnation/|com/|com/fieldnation/modules/fnv2/config/|com/fieldnation/models/|com/fieldnation/modules/|com/fieldnation/modules/fnv2/|com/fieldnation/modules/fnv2/config/|com/fieldnation/models/" including="**/*.java" kind="src" path="src/main/java"/>
 	<classpathentry excluding="**/*.java" kind="src" path="src/main/resources"/>
 	<classpathentry kind="var" path="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" sourcepath="M2_REPO/javax/inject/javax.inject/1/javax.inject-1-sources.jar"/>
 	<classpathentry kind="var" path="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2.jar" sourcepath="M2_REPO/javax/xml/stream/stax-api/1.0-2/stax-api-1.0-2-sources.jar"/>
@@ -269,5 +270,6 @@
 			<attribute name="optional" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="var" path="M2_REPO/com/fieldnation/modules/fn-v2-connector/1.0.0-SNAPSHOT/fn-v2-connector-1.0.0-SNAPSHOT.jar" sourcepath="M2_REPO/com/fieldnation/modules/fn-v2-connector/1.0.0-SNAPSHOT/fn-v2-connector-1.0.0-SNAPSHOT-sources.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

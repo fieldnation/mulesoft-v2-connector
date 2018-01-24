@@ -46,18 +46,18 @@ public class FnV2Connector {
      * AddWorkorder:
      * Create a work order
      * @param workorder_model JSON
-     * @return Workorder Model JSON
+     * @return com.fieldnation.models.WorkOrder
      * @throws Exception 
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String addWorkorder(String workorder_model) throws Exception {
+    public com.fieldnation.models.WorkOrder addWorkorder(String workorder_model) throws Exception {
     	RequestBody body = RequestBody.create(JSON, workorder_model);
         Request request = initClientBuilder("/workorders")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
@@ -75,13 +75,13 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String publishWorkorder(long workorder_id, String json_body) throws Exception {
+    public com.fieldnation.models.WorkOrder publishWorkorder(long workorder_id, String json_body) throws Exception {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/publish")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
@@ -98,13 +98,13 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String routeWorkorder(long workorder_id, String json_body) throws Exception {
+    public com.fieldnation.models.WorkOrder routeWorkorder(long workorder_id, String json_body) throws Exception {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/route")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
@@ -144,13 +144,13 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String updatePay(int workorder_id, String json_body) throws Exception {
+    public com.fieldnation.models.WorkOrder updatePay(int workorder_id, String json_body) throws Exception {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/pay")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
@@ -167,13 +167,13 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String updateSchedule(int workorder_id, String json_body) throws Exception {
+    public com.fieldnation.models.WorkOrder updateSchedule(int workorder_id, String json_body) throws Exception {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/schedule")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
@@ -190,13 +190,13 @@ public class FnV2Connector {
      */
     @Processor
     @ReconnectOn(exceptions = { IOException.class })
-    public String assignWorkorder(long workorder_id, String json_body) throws Exception {
+    public com.fieldnation.models.WorkOrder assignWorkorder(long workorder_id, String json_body) throws Exception {
     	RequestBody body = RequestBody.create(JSON, json_body);
         Request request = initClientBuilder("/workorders/" + workorder_id + "/assignee")
             .post(body)
             .build();
         try (Response response = client.newCall(request).execute()) {
-          return response.body().string();
+          return gson.fromJson(response.body().string(), com.fieldnation.models.WorkOrder.class);
         }catch(IOException e){
         	logger.error(e.getMessage());
         	throw e;
