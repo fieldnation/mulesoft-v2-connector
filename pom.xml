@@ -2,10 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.fieldnation.modules</groupId>
+    <groupId>com.fieldnation</groupId>
     <artifactId>fn-v2-connector</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
+    <packaging>mule-module</packaging>
     <name>Fieldnation V2 Anypoint Connector</name>
     <parent>
         <groupId>org.mule.tools.devkit</groupId>
@@ -75,6 +75,11 @@
             <name>MuleSoft Releases Repository</name>
             <url>http://repository.mulesoft.org/releases/</url>
             <layout>default</layout>
+        </repository>
+    <repository>
+            <id>mulesoft-snapshots</id>
+            <name>MuleSoft Snapshot Repository</name>
+            <url>http://repository-master.mulesoft.org/snapshots/</url>
         </repository>
     </repositories>
 </project>
