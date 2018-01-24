@@ -2,8 +2,6 @@ package com.fieldnation.modules.fnv2.automation.functional;
 
 import static org.junit.Assert.*;
 
-import java.io.IOException;
-
 import com.fieldnation.modules.fnv2.FnV2Connector;
 import org.junit.After;
 import org.junit.Before;
@@ -27,7 +25,7 @@ public class AddWorkorderTestCases extends AbstractTestCase<FnV2Connector> {
 	}
 
 	@Test
-	public void verify() throws IOException {
+	public void verify() throws Exception {
 		java.lang.String expected = null;
 		java.lang.String workorder_model = null;
 		assertEquals(getConnector().addWorkorder(workorder_model), expected);
